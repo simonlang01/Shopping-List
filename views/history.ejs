@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<h1>Meine Einkaufshistorie</h1>
+
+<ul id="historyList" class="list-group">
+  <% if (historyList.length === 0) { %>
+    <p class="text-muted mt-3">Deine Historie ist leer.</p>
+  <% } else { %>
+    <% historyList.forEach(item => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center bg-light text-muted">
+        <div>
+          <strong><%= item.product %></strong>
+          <% if (item.quantity) { %>
+            <span class="badge bg-secondary ms-2"><%= item.quantity %></span>
+          <% } %>
+          <% if (item.notes) { %>
+            <small class="text-muted d-block"><%= item.notes %></small>
+          <% } %>
+        </div>
+        <div>
+          <small>Gekauft: <%= new Date(item.created_at).toLocaleDateString('de-DE') %></small>
+        </div>
+      </li>
+    <% }); %>
+  <% } %>
+</ul>
+
+<%- include('partials/footer') %>

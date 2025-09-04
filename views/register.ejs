@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="login-container">
+        <h2 class="text-center mb-4">Registrierung</h2>
+        <form action="/register" method="POST">
+          <div class="mb-3">
+            <label for="username" class="form-label">Benutzername</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Passwort</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Passwort wiederholen</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Registrieren</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

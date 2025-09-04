@@ -1,0 +1,61 @@
+<%- include('partials/header') %>
+
+<h1>Meine Einkaufsliste</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <h2>Artikel hinzufügen</h2>
+    <form id="addItemForm" action="/add" method="POST">
+      <div class="mb-3">
+        <label for="product" class="form-label">Produkt</label>
+        <input type="text" class="form-control" id="product" name="product" required>
+      </div>
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Menge</label>
+        <input type="text" class="form-control" id="quantity" name="quantity">
+      </div>
+      <div class="mb-3">
+        <label for="notes" class="form-label">Notizen</label>
+        <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-success">Hinzufügen</button>
+    </form>
+  </div>
+
+  <div class="col-md-6">
+    <h2>Zu kaufende Artikel</h2>
+    <ul id="shoppingList" class="list-group">
+        <ul id="shoppingList" class="list-group">
+  <% if (shoppingList.length === 0) { %>
+    <p class="text-muted mt-3">Deine Einkaufsliste ist leer!</p>
+  <% } else { %>
+    <% shoppingList.forEach(item => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong><%= item.product %></strong>
+          <% if (item.quantity) { %>
+            <span class="badge bg-secondary ms-2"><%= item.quantity %></span>
+          <% } %>
+          <% if (item.notes) { %>
+            <small class="text-muted d-block"><%= item.notes %></small>
+          <% } %>
+        </div>
+        <div>
+          <form action="/purchase" method="POST" class="d-inline">
+            <input type="hidden" name="id" value="<%= item.id %>">
+            <button type="submit" class="btn btn-sm btn-success">Gekauft</button>
+          </form>
+          <form action="/delete" method="POST" class="d-inline">
+            <input type="hidden" name="id" value="<%= item.id %>">
+            <button type="submit" class="btn btn-sm btn-danger">Löschen</button>
+          </form>
+        </div>
+      </li>
+    <% }); %>
+  <% } %>
+</ul>
+      </ul>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
